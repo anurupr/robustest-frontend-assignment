@@ -1,4 +1,5 @@
-# social
+# RobusTest Frontend Application
+# Social Media NewsFeed
 
 ## Project setup
 ```
