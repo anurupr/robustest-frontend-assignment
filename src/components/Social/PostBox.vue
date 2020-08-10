@@ -60,11 +60,9 @@ export default {
 
     .post__box .submit {
         width: 100%;
-        border: 1px solid #aaa;
         padding: 0.5rem;
         border-radius: 5px;
-        box-shadow: 0 0px 5px 0 rgba(0, 0, 0, 0.2);
-        background: #83aed2;
+        background: #33a2ff;
         color: white;
         font-size: 15px;
         line-height: 20px;
