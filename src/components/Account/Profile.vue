@@ -28,7 +28,7 @@ export default {
     #profile img {
         border-radius: 150px;
         border: 1px solid #aaa;       
-        box-shadow: 0 0px 5px 0 rgba(0, 0, 0, 0.2);
+        /* box-shadow: 0 0px 5px 0 rgba(0, 0, 0, 0.2); */
         max-width: 120px;
     }
 </style>

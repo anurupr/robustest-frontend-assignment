@@ -1,82 +1,50 @@
 <template>
-    <div class="box post__box">
-        <Row>
-                <Column class="column__ct_1 avatar">
-                    <img src="https://www.gravatar.com/avatar/3f3fd2973e4d5ef103ce6d8d17bfa1b2?s=150&d=robohash&r=PG'" >
-                </Column>
-                <Column class="column__ct_10">
-                    <Column class="column__ct_11">
-                        <textarea></textarea>
-                    </Column>
-                    <Column class="column__ct_1 submit__container">
-                        <button class="submit">Send</button>
-                    </Column>
-                </Column>
-        </Row>
-    </div>
+    <TextBox :pholder="pholder" :content="content">
+        <button class="submit" v-on:click="addPost">Post</button>
+    </TextBox>
 </template>
 <script>
-import Column from '@/components/Common/Column'
-import Row from '@/components/Common/Row'
+import TextBox from '@/components/Common/TextBox'
+import { mutations } from '@/store';
+var moment = require('moment');
 export default {
     name: 'PostBox',
     components: {
-        Column,
-        Row
+        TextBox
+    },
+    methods: {
+        addPost: function() {
+            if (this.content != "") {
+                var post = {
+                    id: mutations.getLatestPostId(),
+                    content: this.content,
+                    user : mutations.getCurrentUser(),
+                    timestamp: moment().fromNow()            
+                }
+                mutations.addPost(post);
+            } else {
+                // show error msg
+            }
+        }
+    },
+    data()  {
+        return {             
+            pholder: "What's going on?",
+            content: ""
+        }
     }
 }
 </script>
 <style scoped>
-    .avatar img {
-        border-radius: 150px;
-        border: 1px solid #aaa;
-        box-shadow: 0 0px 5px 0 rgba(0, 0, 0, 0.2);
-        width: 45px;
-        height: 45px;
-    }
-
-    .avatar {
-        max-width: 60px;
-        padding-right: 0;
-        height: 60px;
-        
-    }
-
-    .post__box .row,
-    .avatar {
-        display: flex;
-    }
-
-    .post__box {
-        margin-bottom: 1rem;
-    }
-
-    .post__box textarea {
-        outline: none;
-        border: 1px solid #aaa;
-        resize: none;   
-        width: 100%;       
-    }
-
-    .post__box .submit {
-        width: 100%;
-        padding: 0.5rem;
-        border-radius: 5px;
-        background: #33a2ff;
-        color: white;
-        font-size: 15px;
-        line-height: 20px;
-        font-weight: bolder;
-        cursor: pointer;
-    }
-
-    .post__box .submit__container {
-        padding: 0px;
-    }
-
-    .post__box textarea,
-    .post__box .submit {
-        float: left;
-    }
+.text__box .submit {
+    width: 100%;
+    padding: 0.5rem;
+    border-radius: 5px;
+    background: #33a2ff;
+    color: white;
+    font-size: 15px;
+    line-height: 20px;
+    font-weight: bolder;
+    cursor: pointer;        
+}
 </style>
-
