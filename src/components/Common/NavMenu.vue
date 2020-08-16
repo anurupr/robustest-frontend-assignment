@@ -9,7 +9,13 @@ export default {
     name: 'NavMenu',
     components: {
         Menu
+    },
+    data() {
+        return {
+            urls: []
+        }
     }
+    
 }
 </script>
 <style scoped>

@@ -7,11 +7,18 @@
             <Column class="column__ct_10">
                 <span class="field username">{{ post.user.username }}</span>
                 <span class="field time">{{ post.timestamp }}</span>
+                <PostMenu v-on:emit-event="handleEmitEvent" />
             </Column>
         </Row>
         <Row>
             <Column class="column__ct_12">
-                <p>{{post.content}}</p>
+                <template v-if="editable">
+                    <p v-text="content" contenteditable="true" @blur="handleInput"></p>
+                    <button class="submit" v-on:click="save">Save</button>
+                </template>
+                <template v-else>
+                    <p>{{ content }}</p>
+                </template>                
             </Column>
         </Row>
         <Row>
@@ -21,9 +28,10 @@
         </Row>
         <Row>
             <Column class="column__ct_12">
-                <Comment v-for="comment in post.comments" :key="comment.id" :comment="comment"></Comment>
+                <Comment v-for="comment in post.comments" :key="comment.id" :comment="comment" :post="post"></Comment>
             </Column>
         </Row>
+        
     </div>
 </template>
 <script>
@@ -31,6 +39,8 @@ import Column from '@/components/Common/Column'
 import Row from '@/components/Common/Row'
 import Comment from '@/components/Social/Comment'
 import CommentBox from '@/components/Social/CommentBox'
+import PostMenu from '@/components/Social/PostMenu'
+import { mutations } from '@/store';
 export default {
     name: 'Post',
     props: ['post'],
@@ -38,11 +48,64 @@ export default {
         Column,
         Row,
         Comment,
-        CommentBox
+        CommentBox,
+        PostMenu
+    },
+    methods: {
+        handleEmitEvent: function(ev) {
+            console.debug('handlingEmitEvent in Post component: ');
+            this.$emit("emit-event", ev);
+            switch(ev) {
+                case 'edit':
+                    this.edit();
+                    break;
+                case 'delete':
+                    this.delete();
+                    break;
+                default:
+                    break;
+            }
+        },
+        edit: function() {
+            console.debug('editing post: ', this.post.id);
+            this.editable = true;
+        },
+        delete: function() {
+            console.debug('deleting post: ', this.post.id);
+            mutations.deletePost(this.post.id);
+            // confirm and then remove from dom
+        },
+        save: function() {
+            this.editable = false;
+            // get content from element and save it in
+            mutations.updatePost(this.post.id, this.content);
+        },
+        cancel: function() {
+            //revert changes
+            this.content = this.post.content;
+            this.editable = false;
+        },
+        handleInput: function(e){
+            this.content = e.target.innerText
+        }
+        
+    },
+    data() {
+        return {
+            content: null,
+            editable: false,
+        }
+    },
+    mounted(){            
+        this.content = this.post.content;
     }
 }
 </script>
 <style scoped> 
+    .nf-item {
+        position: relative;
+    }
+
     .nf-item:not(:first-child):not(:last-child) {
         border-bottom-left-radius: 0;
         border-bottom-right-radius: 0;
@@ -65,7 +128,8 @@ export default {
     }
 
    .nf-item p,
-   .nf-item /deep/ p {
+   .nf-item /deep/ p {        
+        white-space: pre-wrap; /* in case user edits post / comment, this ensures that any line breaks are visible */
         font-family: 'Segoe UI Historic', 'Segoe UI', Helvetica, Arial, sans-serif;
         font-size: 1.5rem;
        
@@ -110,5 +174,16 @@ export default {
     .nf-item .username,
     .nf-item /deep/ .username {
         color: steelblue;
+    }
+
+    .controls {
+        top: 0;
+        right: 0;
+    }
+
+    p[contenteditable="true"] {
+        border: 1px solid #aaa;
+        padding: 0.5em;
+        white-space: pre-wrap;
     }
 </style>

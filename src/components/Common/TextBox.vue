@@ -28,6 +28,7 @@ export default {
     methods: {
         emitChanges () {
             this.$emit("emitChanges", this.content)
+            this.content = "";
         }
     },
     data()  {

@@ -1,0 +1,46 @@
+<template>
+    <Menu :urls="urls" v-on:emit-event="handleEmitEvent" />
+</template>
+<script>
+import Menu from '@/components/Common/Menu'
+export default {
+    name: 'CommentMenu',
+    components: {
+        Menu
+    },
+    methods: {
+        handleEmitEvent: function(ev) {
+            console.debug('handlingEmitEvent in CommentMenu component: ', ev);
+            this.$emit('emit-event', ev);
+        }
+    },
+    data() {
+        return {
+            urls: [
+                {
+                    url: "#",
+                    name: "",
+                    children: [
+                        {
+                            url: "#",
+                            name: "Edit",
+                            target: "",
+                            cl: "post-edit",
+                            icon: "edit",
+                            event: "edit"
+                        },
+                        {
+                            url: "#",
+                            name: "Delete",
+                            target: "",
+                            cl: "post-delete",
+                            icon: "trash",
+                            event: "delete"
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+}
+</script>

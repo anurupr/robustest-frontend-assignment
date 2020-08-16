@@ -55,7 +55,11 @@ export const mutations = {
         return (Math.max.apply(Math, store.state.posts.map(function(o) { return o.id; }))) + 1;        
     },
     getLatestCommentIdForPost(postId) {
-        return (Math.max.apply(Math, store.state.posts[postId - 1].comments.map(function(o) { return o.id; }))) + 1;  
+        if (store.state.posts[postId - 1].comments.length > 0) {
+            return (Math.max.apply(Math, store.state.posts[postId - 1].comments.map(function(o) { return o.id; }))) + 1;  
+        } else {
+            return 1;
+        }
     },
     getCurrentUser() {
         return {
@@ -64,5 +68,35 @@ export const mutations = {
             email: 'anurupraveendran@gmail.com',
             gravatar: 'https://www.gravatar.com/avatar/' + md5('anurupraveendran@gmail.com')+ '?d=robohash&r=PG'
         };
+    },
+    updatePost(postId, content) {
+        if ((typeof content !== 'undefined' || content != null || content != "") && store.state.posts[postId - 1]) {
+            store.state.posts[postId - 1].content = content;
+        }
+    },
+    deletePost(postId) {
+        console.log('postId delete', postId);
+        if (store.state.posts[postId - 1]) {
+            store.state.posts.splice(postId - 1, 1);            
+        }
+    },
+    getPost(postId) {
+        if (store.state.posts[postId - 1])
+            return store.state.posts[postId - 1];
+    },
+    deleteComment(postId, commentId) {
+        console.log('store', 'deleting comment id', commentId, ' of post id', postId);
+        if (store.state.posts[postId - 1]) {
+            if (store.state.posts[postId - 1].comments[commentId - 1]) {
+                store.state.posts[postId - 1].comments.splice(commentId - 1, 1);
+            }
+        }
+    },
+    updateComment(postId, commentId, content) {
+        if ((typeof content !== 'undefined' || content != null || content != "") 
+            && store.state.posts[postId - 1] 
+            && store.state.posts[postId - 1].comments[commentId - 1]) {
+            store.state.posts[postId - 1].comments[commentId - 1].content = content;
+        }
     }
 };
