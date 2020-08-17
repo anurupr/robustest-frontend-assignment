@@ -6,7 +6,8 @@
         "user": {
             "id": 10,
             "username": "anurupr",
-            "email": "anurupraveendran@gmail.com"
+            "email": "anurupraveendran@gmail.com",
+            "gravatar": "https://www.gravatar.com/avatar/3f3fd2973e4d5ef103ce6d8d17bfa1b2/?d=robohash&r=PG"
         },
         "timestamp": 1596993895,
         "comments": []
@@ -18,7 +19,8 @@
         "user": {
             "id": 11,
             "username": "swarupr",
-            "email": "swarupraveendran@gmail.com"
+            "email": "swarupraveendran@gmail.com",
+            "gravatar" : "https://www.gravatar.com/avatar/df7b811abae80971a5a790395764f6d0/?d=robohash&r=PG"
         },
         "timestamp": 1596993895,
         "comments": []
