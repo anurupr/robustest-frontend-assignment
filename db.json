@@ -1,0 +1,38 @@
+{
+  "posts": [
+     {   
+        "id": 1,
+        "content": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum",
+        "user": {
+            "id": 10,
+            "username": "anurupr",
+            "name": "Anurup Raveendran",
+            "email": "anurupraveendran@gmail.com",
+            "gravatar": "https://www.gravatar.com/avatar/3f3fd2973e4d5ef103ce6d8d17bfa1b2/?d=robohash&r=PG"
+        },
+        "timestamp": 1596993895,
+        "comments": []
+    
+    },
+    {   
+        "id": 2,
+        "content": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum",
+        "user": {
+            "id": 11,
+            "username": "swarupr",
+            "name": "Swarup Raveendran",
+            "email": "swarupraveendran@gmail.com",
+            "gravatar" : "https://www.gravatar.com/avatar/df7b811abae80971a5a790395764f6d0/?d=robohash&r=PG"
+        },
+        "timestamp": 1596993895,
+        "comments": []
+    }
+  ],
+  "comments": [
+    { "id": 1, "body": "some comment", "postId": 1 },
+    { "id": 2, "body": "some comment", "postId": 1 }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}
