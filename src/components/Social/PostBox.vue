@@ -1,5 +1,5 @@
 <template>
-    <TextBox :pholder="pholder" :content="content">
+    <TextBox :pholder="pholder" v-on:emitChanges="receiveChanges ($event)">
         <button class="submit" v-on:click="addPost">Post</button>
     </TextBox>
 </template>
@@ -19,12 +19,17 @@ export default {
                     id: mutations.getLatestPostId(),
                     content: this.content,
                     user : mutations.getCurrentUser(),
-                    timestamp: moment().fromNow()            
+                    timestamp: moment().unix(),
+                    comments: []      
                 }
                 mutations.addPost(post);
             } else {
+                console.error('content = ""')
                 // show error msg
             }
+        },
+        receiveChanges: function(data) {
+            this.content = data            
         }
     },
     data()  {

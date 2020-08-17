@@ -1,55 +1,25 @@
 import Vue from "vue";
-var crypto = require('crypto');
-var moment = require('moment');
-var md5 = str => {
-    return crypto.createHash('md5').update(str).digest("hex");
-}
-
-var gethtime = timestamp => {
-   return moment.unix(timestamp).fromNow();
-}
-
+import * as utils from "@/utils";
+import api from "@/api/";
 export const store = Vue.observable({
     state: {
         loggedIn: false,
-        posts: [
-            {   
-                id: 1,
-                content: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum",
-                user: {
-                    id: 10,
-                    username: 'anurupr',
-                    email: 'anurupraveendran@gmail.com',
-                    gravatar: 'https://www.gravatar.com/avatar/' + md5('anurupraveendran@gmail.com')+ '?d=robohash&r=PG'
-                },
-                timestamp: gethtime(1596993895),
-                comments: []
-            
-            },
-            {   
-                id: 2,
-                content: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum",
-                user: {
-                    id: 11,
-                    username: 'swarupr',
-                    email: 'swarupraveendran@gmail.com',
-                    gravatar: 'https://www.gravatar.com/avatar/' + md5('swarupraveendran@gmail.com') +'?d=robohash&r=PG'
-
-                },
-                timestamp: gethtime(1596993895),
-                comments: []
-            },
-        
-        ],
+        posts: [],
+        users: []
     }
 });
 
 export const mutations = {    
     addPost(post) {
+        console.log('post', post);
         store.state.posts.unshift(post);
     },
     addComment(postId, comment) {
-        store.state.posts[postId - 1].comments.unshift(comment);
+        const postIndex = this.getPostIndex(postId);
+        if (postIndex != -1) {
+            store.state.posts[postIndex].comments.unshift(comment);
+        }
+        
     },
     getLatestPostId() {
         return (Math.max.apply(Math, store.state.posts.map(function(o) { return o.id; }))) + 1;        
@@ -63,10 +33,11 @@ export const mutations = {
     },
     getCurrentUser() {
         return {
-            id: 10,
+            id: 1,
             username: 'anurupr',
+            name: 'Anurup Raveendran',
             email: 'anurupraveendran@gmail.com',
-            gravatar: 'https://www.gravatar.com/avatar/' + md5('anurupraveendran@gmail.com')+ '?d=robohash&r=PG'
+            gravatar: utils.cgravatar('anurupraveendran@gmail.com')
         };
     },
     updatePost(postId, content) {
@@ -76,27 +47,62 @@ export const mutations = {
     },
     deletePost(postId) {
         console.log('postId delete', postId);
-        if (store.state.posts[postId - 1]) {
-            store.state.posts.splice(postId - 1, 1);            
+        const postIndex = this.getPostIndex(postId);
+        if (postIndex != -1) {
+            store.state.posts.splice(postIndex, 1);            
         }
     },
+    getPostIndex(postId) {
+        return store.state.posts.findIndex(p => p.id == postId);
+    },
     getPost(postId) {
-        if (store.state.posts[postId - 1])
-            return store.state.posts[postId - 1];
+        return store.state.posts.find(p => p.id == postId);
+    },
+    getCommentIndex(postId, commentId) {
+        const post = this.getPost(postId);
+        if (post)
+            return post.comments.findIndex(c => c.id == commentId);
+        else 
+            return -1;
+    },
+    getComment(postId, commentId) {
+        const post = this.getPost(postId);
+        if (post)
+            return post.comments.find(c => c.id == commentId);
     },
     deleteComment(postId, commentId) {
-        console.log('store', 'deleting comment id', commentId, ' of post id', postId);
-        if (store.state.posts[postId - 1]) {
-            if (store.state.posts[postId - 1].comments[commentId - 1]) {
-                store.state.posts[postId - 1].comments.splice(commentId - 1, 1);
-            }
+        console.log('store', 'deleting comment id', commentId, ' of post id', postId);        
+        const postIndex = this.getPostIndex(postId);
+        const commentIndex =  this.getCommentIndex(postId, commentId);
+        if (postIndex != -1 && commentIndex != -1) {
+            store.state.posts[postIndex].comments.splice(commentIndex, 1);
+            
         }
     },
     updateComment(postId, commentId, content) {
-        if ((typeof content !== 'undefined' || content != null || content != "") 
-            && store.state.posts[postId - 1] 
-            && store.state.posts[postId - 1].comments[commentId - 1]) {
-            store.state.posts[postId - 1].comments[commentId - 1].content = content;
+        const postIndex = this.getPostIndex(postId);
+        const commentIndex =  this.getCommentIndex(postId, commentId);
+        if ((typeof content !== 'undefined' || content != null || content != "")             
+            && postIndex != -1
+            && commentIndex != -1) {
+            store.state.posts[postIndex].comments[commentIndex].content = content;
         }
+    },
+    getAllPosts() {
+        api('/posts')        
+        .then(response => response.json())
+        .then(json => {
+            store.state.posts = json;
+            store.state.posts.sort((a, b) => b.timestamp - a.timestamp);           
+            console.log(store.state.posts);
+        })
+    },
+    getAllUsers() {
+        fetch('https://jsonplaceholder.typicode.com/users')
+        .then(response => response.json())
+        .then(json => {
+            store.state.users = json;
+            console.log(store.state.users);
+        })
     }
 };

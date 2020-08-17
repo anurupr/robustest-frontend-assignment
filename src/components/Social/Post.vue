@@ -5,8 +5,8 @@
                 <img :src="post.user.gravatar">
             </Column>
             <Column class="column__ct_10">
-                <span class="field username">{{ post.user.username }}</span>
-                <span class="field time">{{ post.timestamp }}</span>
+                <span class="field username">{{ post.user.name }}</span>
+                <span class="field time">{{ gethtime(post.timestamp) }}</span>
                 <PostMenu v-on:emit-event="handleEmitEvent" />
             </Column>
         </Row>
@@ -41,6 +41,7 @@ import Comment from '@/components/Social/Comment'
 import CommentBox from '@/components/Social/CommentBox'
 import PostMenu from '@/components/Social/PostMenu'
 import { mutations } from '@/store';
+import { gethtime } from '@/utils';
 export default {
     name: 'Post',
     props: ['post'],
@@ -94,9 +95,12 @@ export default {
         return {
             content: null,
             editable: false,
+            gethtime(tstamp){
+                return gethtime(tstamp);
+            }
         }
     },
-    mounted(){            
+    mounted(){      
         this.content = this.post.content;
     }
 }

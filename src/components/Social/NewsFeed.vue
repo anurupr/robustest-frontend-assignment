@@ -5,17 +5,24 @@
 </template>
 <script>
 import Post from '@/components/Social/Post'
-import { store } from '@/store';
+import { store, mutations } from '@/store';
 
 export default {
     name: 'NewsFeed',
     components: {
         Post
     },
-    data() {
-        return {
-            posts: store.state.posts
+    computed: {
+        posts() {
+            return store.state.posts            
         }
-      }
+    },
+    mounted() {
+        if (store.state.users.length == 0)
+            mutations.getAllUsers();
+        if (store.state.posts.length == 0)            
+            mutations.getAllPosts();
+    }
+    
 }
 </script>
