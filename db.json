@@ -6,6 +6,7 @@
         "user": {
             "id": 10,
             "username": "anurupr",
+            "name": "Anurup Raveendran",
             "email": "anurupraveendran@gmail.com",
             "gravatar": "https://www.gravatar.com/avatar/3f3fd2973e4d5ef103ce6d8d17bfa1b2/?d=robohash&r=PG"
         },
@@ -19,6 +20,7 @@
         "user": {
             "id": 11,
             "username": "swarupr",
+            "name": "Swarup Raveendran",
             "email": "swarupraveendran@gmail.com",
             "gravatar" : "https://www.gravatar.com/avatar/df7b811abae80971a5a790395764f6d0/?d=robohash&r=PG"
         },
