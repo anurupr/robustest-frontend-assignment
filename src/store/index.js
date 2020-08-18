@@ -1,6 +1,7 @@
 import Vue from "vue";
 import * as utils from "@/utils";
-import api from "@/api/";
+import Posts from "@/api/Posts";
+
 export const store = Vue.observable({
     state: {
         loggedIn: false,
@@ -9,18 +10,7 @@ export const store = Vue.observable({
     }
 });
 
-export const mutations = {    
-    addPost(post) {
-        console.log('post', post);
-        store.state.posts.unshift(post);
-    },
-    addComment(postId, comment) {
-        const postIndex = this.getPostIndex(postId);
-        if (postIndex != -1) {
-            store.state.posts[postIndex].comments.unshift(comment);
-        }
-        
-    },
+export const mutations = {     
     getLatestPostId() {
         return (Math.max.apply(Math, store.state.posts.map(function(o) { return o.id; }))) + 1;        
     },
@@ -40,18 +30,6 @@ export const mutations = {
             gravatar: utils.cgravatar('anurupraveendran@gmail.com')
         };
     },
-    updatePost(postId, content) {
-        if ((typeof content !== 'undefined' || content != null || content != "") && store.state.posts[postId - 1]) {
-            store.state.posts[postId - 1].content = content;
-        }
-    },
-    deletePost(postId) {
-        console.log('postId delete', postId);
-        const postIndex = this.getPostIndex(postId);
-        if (postIndex != -1) {
-            store.state.posts.splice(postIndex, 1);            
-        }
-    },
     getPostIndex(postId) {
         return store.state.posts.findIndex(p => p.id == postId);
     },
@@ -69,15 +47,44 @@ export const mutations = {
         const post = this.getPost(postId);
         if (post)
             return post.comments.find(c => c.id == commentId);
+    },  
+    addPost(post) {
+        console.log('post', post);
+        store.state.posts.unshift(post);
+        return Posts.createPost(post);
     },
-    deleteComment(postId, commentId) {
-        console.log('store', 'deleting comment id', commentId, ' of post id', postId);        
-        const postIndex = this.getPostIndex(postId);
-        const commentIndex =  this.getCommentIndex(postId, commentId);
-        if (postIndex != -1 && commentIndex != -1) {
-            store.state.posts[postIndex].comments.splice(commentIndex, 1);
-            
+    updatePost(postId, content) {
+        if ((typeof content !== 'undefined' || content != null || content != "")) {
+            const postIndex = this.getPostIndex(postId);
+            if (postIndex != -1) {
+                store.state.posts[postIndex].content = content;                
+                return Posts.updatePost(store.state.posts[postIndex]);
+            } else {
+                return null;
+            }
+        } else {
+            return null;
         }
+    },
+    deletePost(postId) {
+        console.log('postId delete', postId);
+        const postIndex = this.getPostIndex(postId);
+        if (postIndex != -1) {
+            store.state.posts.splice(postIndex, 1); 
+            return Posts.deletePost(postId);
+        } else {
+            return null;
+        }
+    },
+    addComment(postId, comment) {
+        const postIndex = this.getPostIndex(postId);
+        if (postIndex != -1) {
+            store.state.posts[postIndex].comments.unshift(comment);
+            return Posts.createComment(store.state.posts[postIndex]);
+        } else {
+            return null;
+        }
+        
     },
     updateComment(postId, commentId, content) {
         const postIndex = this.getPostIndex(postId);
@@ -85,16 +92,29 @@ export const mutations = {
         if ((typeof content !== 'undefined' || content != null || content != "")             
             && postIndex != -1
             && commentIndex != -1) {
-            store.state.posts[postIndex].comments[commentIndex].content = content;
+                store.state.posts[postIndex].comments[commentIndex].content = content;
+                return Posts.updateComment(store.state.posts[postIndex])
+        } else {
+            return null;
+        }
+    },
+    deleteComment(postId, commentId) {
+        console.log('store', 'deleting comment id', commentId, ' of post id', postId);        
+        const postIndex = this.getPostIndex(postId);
+        const commentIndex =  this.getCommentIndex(postId, commentId);
+        if (postIndex != -1 && commentIndex != -1) {            
+            store.state.posts[postIndex].comments.splice(commentIndex, 1);
+            return Posts.deleteComment(store.state.posts[postIndex]);
+        } else {
+            return null;
         }
     },
     getAllPosts() {
-        api('/posts')        
-        .then(response => response.json())
-        .then(json => {
+        return Posts.getPosts()
+        .then((json) => {
+            console.log('json', json);
             store.state.posts = json;
-            store.state.posts.sort((a, b) => b.timestamp - a.timestamp);           
-            console.log(store.state.posts);
+            store.state.posts.sort((a, b) => b.timestamp - a.timestamp);            
         })
     },
     getAllUsers() {
@@ -102,7 +122,7 @@ export const mutations = {
         .then(response => response.json())
         .then(json => {
             store.state.users = json;
-            console.log(store.state.users);
+            // console.log(store.state.users);
         })
     }
 };
