@@ -1,4 +1,4 @@
-/* Home View */
+<!-- Home View -->
 <template>
   <Container>
       <Row>
@@ -13,12 +13,10 @@
           </Column>
           <!-- Post Box + News Feed -->
           <Column class="column__ct_6">
-            <PostBox />
+            <template v-if="loggedIn">
+              <PostBox />
+            </template>
             <NewsFeed />
-          </Column>
-          <!-- Suggestions -->
-          <Column class="column__ct_3">
-            <Suggestions />
           </Column>
       </Row>
   </Container>
@@ -32,8 +30,7 @@ import Header from "@/components/Common/Header"
 import Profile from "@/components/Account/Profile"
 import NewsFeed from "@/components/Social/NewsFeed"
 import PostBox from "@/components/Social/PostBox"
-import Suggestions from "@/components/Social/Suggestions"
-
+import { store } from '@/store'
 export default {
     name: 'Home',
     components: {
@@ -43,8 +40,12 @@ export default {
         Header,
         Profile,
         NewsFeed,
-        PostBox,
-        Suggestions
-    }    
+        PostBox
+    },
+    computed: {
+      loggedIn() {
+        return store.state.loggedIn;
+      }
+    }
 }
 </script>

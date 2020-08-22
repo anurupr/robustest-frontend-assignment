@@ -5,7 +5,8 @@
                   :href="item.url" 
                   :title="item.name" 
                   @click="isOpen = !isOpen, active = !active" 
-                  :class="{ active }">
+
+                  v-bind:class="[{ active }, item.cl]">
                   {{ item.name }}
                 </a>
                 <div :class="{ isOpen }" class="dropdown">
@@ -19,17 +20,24 @@
                 </div>
             </template>
             <template v-else>
-                <a 
-                  :href="item.url" 
-                  :title="item.name">{{ item.name }}</a>
+                <template v-if="isVisible">
+                    <a
+                    @click="onClick(item.event)" 
+                    :href="item.url" 
+                    :title="item.name">
+                    <FontAwesomeIcon :icon="item.icon" />
+                    <span>{{ item.name }}</span></a>
+                </template>
             </template>
     </li>    
 </template>
 <script>
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons'
+import { faEdit, faTrash, faSignInAlt, faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-library.add(faEdit, faTrash)
+import { store } from '@/store'
+import { bus } from '../../main'
+library.add(faEdit, faTrash, faSignInAlt, faSignOutAlt)
 export default {
     name: 'MenuItem',
     props: ['item'],
@@ -37,9 +45,19 @@ export default {
         FontAwesomeIcon
     },
     data() {
-        return {
+        console.log('store.state', store.state);
+        console.log('store.state[this.item.cond] == this.item.condValue', this.item.cond, store.state[this.item.cond], this.item.condValue, store.state[this.item.cond] == this.item.condValue);
+        return {            
             isOpen: false,
-            active: false,
+            active: false,            
+        }
+    },
+    computed: {
+        name() {
+            return this.item.name
+        },       
+        isVisible() {
+            return store.state[this.item.cond] == this.item.condValue 
         }
     },
     methods: {
@@ -48,15 +66,25 @@ export default {
             this.$emit("emit-event", event);
             this.isOpen = false;
         }
+    },
+    // not essential, but can be used for debugging
+    created() {    
+        bus.$on('login-change', function(d) {
+            console.log('login-change d', d);            
+            console.log('login-change isVisible', this.name, this.isVisible);
+            console.log('login-change store.state.loggedIn', store.state.loggedIn);
+        })
     }
 }
 </script>
 <style scoped>
+    .menuitem a > span,
     .dropdown /deep/ a > span {
         display: inline-block;
         text-indent: 5px;
     }
-    .menuitem > a:after {
+    
+    .menuitem > a.dot:after {
         content: '\2807';
         font-size: 25px;
         padding-left: 8px;

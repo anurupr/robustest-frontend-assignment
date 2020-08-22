@@ -6,7 +6,7 @@
 <script>
 import Post from '@/components/Social/Post'
 import { store, mutations } from '@/store';
-
+import { bus } from '../../main'
 export default {
     name: 'NewsFeed',
     components: {
@@ -18,10 +18,15 @@ export default {
         }
     },
     mounted() {
-        if (store.state.users.length == 0)
-            mutations.getAllUsers();
-        if (store.state.posts.length == 0)            
-            mutations.getAllPosts();
+        bus.$emit('loading', true);
+        // if (store.state.users.length == 0)
+        //     mutations.getAllUsers();        
+        if (store.state.posts.length == 0) {
+            // create a delay
+            setTimeout(function() {
+                mutations.getAllPosts().then(() => bus.$emit('loading', false));
+            }, 500);            
+        }
     }
     
 }

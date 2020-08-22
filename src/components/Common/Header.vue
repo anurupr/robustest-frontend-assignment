@@ -1,28 +1,29 @@
-/* Layout Header */
+<!-- Layout Header -->
 <template>
     <header>
         <nav>            
-            <div class="logo column__ct_3">
+            <Column class="logo column__ct_3">
+                <img src="@/assets/logo.png" />
                 <span>feed.</span>
-            </div>
-            <div class="column__ct_3">
+            </Column>
+            <Column class="column__ct_5">
+                <div style="visibility: hidden;">feed</div>
+            </Column>
+            <Column class="column__ct_4">
                 <NavMenu />
-            </div>
-            <div class="column__ct_3">
-                <AccountMenu />
-            </div>
+            </Column>
         </nav>
     </header>
 </template>
 <script>
 import NavMenu from '@/components/Common/NavMenu.vue'
-import AccountMenu from '@/components/Account/AccountMenu.vue'
+import Column from "@/components/Common/Column"
 
 export default {
     name: 'Header',
     components: {
         NavMenu,
-        AccountMenu
+        Column
     }
 }
 </script>
@@ -35,5 +36,9 @@ export default {
     nav  > * {
         float: left;
     }
-    .logo span {  font-family: 'Rowdies', cursive; font-size: 3rem; font-weight:bold;}
+    .logo span {  font-family: 'Rowdies', cursive; font-size: 3rem; font-weight:bold; margin-left: 10px;}
+    .logo img {
+        vertical-align: middle;
+        max-width: 64px;
+    }
 </style>

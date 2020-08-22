@@ -21,11 +21,13 @@
                 </template>                
             </Column>
         </Row>
-        <Row>
-            <Column class="column__ct_12">
-                <CommentBox :postId="post.id" />
-            </Column>
-        </Row>
+        <template v-if="loggedIn">
+            <Row>
+                <Column class="column__ct_12">
+                    <CommentBox :postId="post.id" />
+                </Column>
+            </Row>
+        </template>
         <Row>
             <Column class="column__ct_12">
                 <Comment v-for="comment in post.comments" :key="comment.id" :comment="comment" :post="post"></Comment>
@@ -40,7 +42,7 @@ import Row from '@/components/Common/Row'
 import Comment from '@/components/Social/Comment'
 import CommentBox from '@/components/Social/CommentBox'
 import PostMenu from '@/components/Social/PostMenu'
-import { mutations } from '@/store';
+import { store, mutations } from '@/store';
 import { gethtime } from '@/utils';
 export default {
     name: 'Post',
@@ -100,6 +102,11 @@ export default {
             }
         }
     },
+    computed: {
+      loggedIn() {
+        return store.state.loggedIn;
+      }
+    },    
     mounted(){      
         this.content = this.post.content;
     }

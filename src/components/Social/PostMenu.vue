@@ -20,6 +20,7 @@ export default {
                 {
                     url: "#",
                     name: "",
+                    cl: "dot",
                     children: [
                         {
                             url: "#",

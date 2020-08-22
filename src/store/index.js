@@ -2,15 +2,25 @@ import Vue from "vue";
 import * as utils from "@/utils";
 import Posts from "@/api/Posts";
 
-export const store = Vue.observable({
+const origState = {
     state: {
         loggedIn: false,
         posts: [],
-        users: []
+        users: [],
+        currentUser: null
     }
-});
+}
 
-export const mutations = {     
+export const store = Vue.observable(origState);
+
+export const mutations = {   
+    logout(){
+        this.clearState();
+        window.location.reload();
+    },    
+    clearState() {
+        store.state = origState;
+    },
     getLatestPostId() {
         return (Math.max.apply(Math, store.state.posts.map(function(o) { return o.id; }))) + 1;        
     },
