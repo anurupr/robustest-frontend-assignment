@@ -7,7 +7,7 @@
                 <span>feed.</span>
             </Column>
             <Column class="column__ct_5">
-                <div style="visibility: hidden;">feed</div>
+                <HiddenDiv />
             </Column>
             <Column class="column__ct_4">
                 <NavMenu />
@@ -18,12 +18,14 @@
 <script>
 import NavMenu from '@/components/Common/NavMenu.vue'
 import Column from "@/components/Common/Column"
+import HiddenDiv from '@/components/Common/HiddenDiv'
 
 export default {
     name: 'Header',
     components: {
         NavMenu,
-        Column
+        Column,
+        HiddenDiv
     }
 }
 </script>
