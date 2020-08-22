@@ -2,7 +2,7 @@
     <div class="box text__box">
         <Row>
             <Column class="column__ct_1 avatar">
-                <img src="https://www.gravatar.com/avatar/3f3fd2973e4d5ef103ce6d8d17bfa1b2?s=150&d=robohash&r=PG'" >
+                <img :src="user.gravatar" >
             </Column>
             <Column class="column__ct_10">
                 <Column class="column__ct_11">
@@ -18,6 +18,8 @@
 <script>
 import Column from '@/components/Common/Column'
 import Row from '@/components/Common/Row'
+import { mutations } from '@/store'
+
 export default {
     name: 'Box',
     props: ['pholder'],    
@@ -33,7 +35,8 @@ export default {
     },
     data()  {
         return {             
-            content: ""
+            content: "",
+            user: mutations.getCurrentUser()
         }
     }
 }

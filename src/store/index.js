@@ -32,12 +32,15 @@ export const mutations = {
         }
     },
     getCurrentUser() {
+        // this should use the auth handler to get the correct user
+        // since it is a static app, we are using a static object
         return {
             id: 1,
-            username: 'anurupr',
-            name: 'Anurup Raveendran',
-            email: 'anurupraveendran@gmail.com',
-            gravatar: utils.cgravatar('anurupraveendran@gmail.com')
+            username: 'rtester',
+            name: 'Robus Tester',
+            email: 'robustester@gmail.com',
+            location: 'Bangalore, India',
+            gravatar: utils.cgravatar('robustester@gmail.com')
         };
     },
     getPostIndex(postId) {

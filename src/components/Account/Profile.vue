@@ -1,13 +1,20 @@
 <template>
     <div class="box" id="profile">
-        <div><img src="https://www.gravatar.com/avatar/3f3fd2973e4d5ef103ce6d8d17bfa1b2?s=150&d=robohash&r=PG'" ></div>
-        <span class="name">Anurup Raveendran</span>
-        <span class="location">Kerala, India</span>
+        <div><img :src="user.gravatar" ></div>
+        <span class="name">{{ user.name }}</span>
+        <span class="location">{{ user.location }}</span>
     </div>
 </template>
 <script>
+import { mutations } from '@/store'
 export default {
-    name: 'Profile'
+    name: 'Profile',
+    // props: ['user']  || correct method
+    data() {
+        return {
+            user: mutations.getCurrentUser()
+        }
+    }
 }
 </script>
 <style scoped>
