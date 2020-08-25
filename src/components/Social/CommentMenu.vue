@@ -1,5 +1,5 @@
 <template>
-    <Menu :urls="urls" v-on:emit-event="handleEmitEvent" />
+    <Menu :urls="urls" :cl="cl" v-on:emit-event="handleEmitEvent" />
 </template>
 <script>
 import Menu from '@/components/Common/Menu'
@@ -16,6 +16,7 @@ export default {
     },
     data() {
         return {
+            cl: "floating",
             urls: [
                 {
                     url: "#",

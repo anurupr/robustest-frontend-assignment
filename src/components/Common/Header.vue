@@ -1,18 +1,16 @@
 <!-- Layout Header -->
 <template>
-    <header>
-        <nav>            
-            <Column class="logo column__ct_3">
+    <header>        
+            <Column class="logo column__ct_3 column__xs__ct_8">                
                 <img src="@/assets/logo.png" />
-                <span>feed.</span>
+                <span>feed.</span>                
             </Column>
-            <Column class="column__ct_5">
+            <Column class="column__ct_5 column__xs__ct_1">
                 <HiddenDiv />
             </Column>
-            <Column class="column__ct_4">
+            <Column class="column__ct_4 column__xs__ct_3">
                 <NavMenu />
-            </Column>
-        </nav>
+            </Column>        
     </header>
 </template>
 <script>
@@ -34,10 +32,12 @@ export default {
     header  > * {
         float: left;
     }
-    nav { width: 100% }
-    nav  > * {
-        float: left;
+    .logo {
+        justify-content: center;
+        align-items: center;
+        display: flex;
     }
+    
     .logo span {  font-family: 'Rowdies', cursive; font-size: 3rem; font-weight:bold; margin-left: 10px;}
     .logo img {
         vertical-align: middle;

@@ -1,14 +1,14 @@
 <template>
     <div class="box text__box">
         <Row>
-            <Column class="column__ct_1 avatar">
+            <Column class="column__ct_1 column__xs__ct_2 avatar">
                 <img :src="user.gravatar" >
             </Column>
-            <Column class="column__ct_10">
-                <Column class="column__ct_11">
+            <Column class="column__ct_10 column__xs__ct_10">
+                <Column class="column__ct_11 column__xs__ct_9 textbox__container">
                     <textarea v-model="content" :placeholder="pholder" @change="emitChanges ()" ></textarea>
                 </Column>
-                <Column class="column__ct_1 submit__container">
+                <Column class="column__ct_1 column__xs__ct_3 submit__container">
                     <slot></slot>
                 </Column>
             </Column>
@@ -62,7 +62,7 @@ export default {
     }
 
     .text__box {
-        margin-bottom: 1rem;
+        margin: 1rem 0;
     }
 
     .text__box textarea {
@@ -75,8 +75,13 @@ export default {
         padding: .5rem;  
         height: auto;
         background: white;    
+        max-height: 45px;  
     }
 
+
+    .text__box .textbox__container {
+        padding: 0 1rem;
+    }
     
 
     .text__box .submit__container {
@@ -86,5 +91,9 @@ export default {
     .text__box textarea,
     .text__box .submit {
         float: left;
+    }
+
+
+    @media screen and (max-width: 576px) {       
     }
 </style>

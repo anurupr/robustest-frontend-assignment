@@ -8,4 +8,14 @@
         right: 2rem;
         max-width: 5rem;
     }
+
+    @media screen and (max-width: 576px) {
+        .loader {
+            top: 1rem;
+            right: 1rem;
+            max-width: 3rem;
+        }
+    }
+
+    
 </style>

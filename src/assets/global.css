@@ -85,12 +85,19 @@
     position: relative;
     /* box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 2.5rem 5rem 0 rgba(0, 0, 0, 0.1); */
   }
-  @media screen and (min-width: 550px) {
+  @media screen and (max-width: 576px) {
+    #app {
+      padding: 0 5px;
+    }
+  }
+
+  /* @media screen and (min-width: 550px) {
     #app {
       padding: 4rem;
       padding-top: 2rem;
     }
-  }
+  } */
+
   #app > * {
     margin-left: auto;
     margin-right: auto;
@@ -132,4 +139,11 @@
 
   .controls {
     position: absolute;
+  }
+
+  .separator {
+    border: 0;
+    height: 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
   }

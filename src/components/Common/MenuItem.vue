@@ -4,7 +4,7 @@
                 <a 
                   :href="item.url" 
                   :title="item.name" 
-                  @click="isOpen = !isOpen, active = !active" 
+                  @click="onParentClick($event)" 
 
                   v-bind:class="[{ active }, item.cl]">
                   {{ item.name }}
@@ -12,17 +12,19 @@
                 <div :class="{ isOpen }" class="dropdown">
                     <ul>
                         <li 
-                          v-for="{ url, name, cl, icon, index, event, target } in item.children" 
-                          :key="index">                            
-                            <a :class="cl" :href="url" :title="name" :target="target" @click="onClick(event)"><FontAwesomeIcon :icon="icon" /><span>{{ name }}</span></a>
+                          v-for="{ url, name, cl, icon, index, event, target, cond, condValue } in item.children" 
+                          :key="index"> 
+                          <template v-if="isVisible({ cond, condValue })">
+                            <a :class="cl" :href="url" :title="name" :target="target" @click="onClick(event, $event)"><FontAwesomeIcon :icon="icon" /><span>{{ name }}</span></a>
+                           </template>
                         </li>
                     </ul>
                 </div>
             </template>
             <template v-else>
-                <template v-if="isVisible">
+                <template v-if="isVisible()">
                     <a
-                    @click="onClick(item.event)" 
+                    @click="onClick(item.event, $event)" 
                     :href="item.url" 
                     :title="item.name">
                     <FontAwesomeIcon :icon="item.icon" />
@@ -55,16 +57,26 @@ export default {
     computed: {
         name() {
             return this.item.name
-        },       
-        isVisible() {
-            return store.state[this.item.cond] == this.item.condValue 
-        }
+        }       
+        
     },
     methods: {
-        onClick: function(event)  {
+        onParentClick: function(e) {
+            this.isOpen = !this.isOpen;
+            this.active = !this.active;
+            e.preventDefault();
+        },
+        onClick: function(event, e)  {
             console.log('onClick', event);
             this.$emit("emit-event", event);
             this.isOpen = false;
+            e.preventDefault()
+        },
+        isVisible(item) {
+            if (typeof item === 'undefined')
+                item = this.item
+
+            return store.state[item.cond] == item.condValue 
         }
     },
     // not essential, but can be used for debugging
@@ -89,6 +101,12 @@ export default {
         font-size: 25px;
         padding-left: 8px;
     } 
+
+    .menuitem > a.hamburger:after {
+        content: '\2261';
+        font-size: 25px;
+        padding-left: 8px;
+    }
 
     .dropdown ul {
         text-align: left;

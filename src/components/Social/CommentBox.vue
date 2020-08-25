@@ -34,7 +34,7 @@ export default {
     },
     data()  {
         return {             
-            pholder: "Comment on this post",
+            pholder: "Write a comment",
             content: ""
         }
     }
@@ -44,11 +44,19 @@ export default {
 .box {
     box-shadow: none;
 }
+
+.text__box {
+    margin: 0;
+    padding: 0;
+}
+
+
 .text__box .submit {
     width: 100%;
     padding: 0.5rem;
     border-radius: 5px;
-    background: #33a2ff;
+    /* background: #33a2ff; */
+    background: #65afec;
     color: white;
     font-size: 10px;
     line-height: 15px;
@@ -59,8 +67,9 @@ export default {
 /* since text__box is used in parent components, its not able to find the right textarea for this component 
    using the /deep/ selector solves this issue */
 
-.text__box /deep/ textarea {
-    height: 30px;
+.text__box /deep/ textarea {  
+    
     background: #f6f6f6;
 }
+
 </style>

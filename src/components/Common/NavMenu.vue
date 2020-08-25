@@ -1,6 +1,9 @@
 <!-- Nav Menu -->
 <template>
-    <Menu :urls="urls" v-on:emit-event="handleEmitEvent"  />    
+    <nav>
+        <Menu :urls="urls" :cl="regularClass" v-on:emit-event="handleEmitEvent"  />
+        <Menu :urls="rurls" :cl="respClass" v-on:emit-event="handleEmitEvent"  />        
+    </nav>
 </template>
 <script>
 import Menu from '@/components/Common/Menu.vue'
@@ -27,6 +30,8 @@ export default {
     },    
     data() {
         return {
+            regularClass: "regular",
+            respClass: "responsive",
             urls: [
                 {
                             url: "#",
@@ -50,10 +55,27 @@ export default {
                         }
             ]
         }
+    },
+    computed: {
+        
+            rurls() {
+                return  [
+                    {
+                        url: "#",
+                        name: "",
+                        cl: "hamburger",
+                        children: this.urls
+                    }
+                ]
+            }
+        
     }
     
 }
 </script>
 <style scoped>
-    
+    nav { width: 100% }
+    nav  > * {
+        float: right;
+    }
 </style>

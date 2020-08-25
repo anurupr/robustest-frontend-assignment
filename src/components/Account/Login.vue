@@ -1,20 +1,29 @@
 <template>
     <Modal ref="modal">
-        <form action="/login" method="POST" @submit="submit" >
-            <input v-model="username" type="text" name="username" placeholder="Username" required>
-            <input v-model="password" type="password" name="password" placeholder="Password" required>
-            <input type="submit" value="Login">
+        <form class="login" action="/login" method="POST" @submit="submit" >
+            <h3>Login to your account</h3>
+            <Column class="column__ct_12">
+                <input ref="username" v-model="username" autofocus type="text" name="username" placeholder="Username" required>
+            </Column>
+            <Column class="column__ct_12">
+                <input v-model="password" type="password" name="password" placeholder="Password" required>
+            </Column>
+            <Column class="column__ct_12">
+                <input type="submit" value="Login">
+            </Column>
         </form>
     </Modal>
 </template>
 <script>
 import Modal from '@/components/Common/Modal'
+import Column from '@/components/Common/Column'
 import { store } from '@/store'
 import { bus } from '../../main'
 export default {
     name: 'Login',
     components: {
-        Modal
+        Modal,
+        Column
     },
     data() {
         return {
@@ -23,6 +32,10 @@ export default {
         }
     },
     methods: {
+        focusInput() {
+            this.$refs.username.focus();
+            
+        },
         validate() {
             return this.username.length > 0 && this.password.length > 0;
         },
@@ -40,6 +53,9 @@ export default {
         },
         showLoginForm() {
             this.$refs.modal.showModal();
+            this.$nextTick(function () {
+              this.focusInput();
+            })           
         },
         hideLoginForm() {
             this.$refs.modal.hideModal();
@@ -48,7 +64,7 @@ export default {
 }
 </script>
 <style scoped>
-    form {
+    form.login {
         background: #fff;
         padding: 2rem;
         min-height: 30rem;
@@ -58,8 +74,12 @@ export default {
         box-shadow: 0px 0px 9px -3px #000;
     }
 
-    form > input[type="text"],
-    form > input[type="password"] {
+    form.login input {
+        width: 100%;
+    }
+
+    form.login input[type="text"],
+    form.login input[type="password"] {
         border: 0;
         border-bottom-color: currentcolor;
         border-bottom-style: none;
@@ -71,7 +91,7 @@ export default {
         margin-bottom: 2rem;
     }
 
-    form > input[type="submit"] {
+    form.login input[type="submit"] {
         border-radius: 5px;
         background: #33a2ff;
         color: white;

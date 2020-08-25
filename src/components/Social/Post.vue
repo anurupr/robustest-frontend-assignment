@@ -1,13 +1,15 @@
 <template>
     <div class="box nf-item">
         <Row>
-            <Column class="column__ct_1 avatar">
+            <Column class="column__ct_1  column__xs__ct_2 avatar">
                 <img :src="post.user.gravatar">
             </Column>
-            <Column class="column__ct_10">
+            <Column class="column__ct_10  column__xs__ct_9">
                 <span class="field username">{{ post.user.name }}</span>
                 <span class="field time">{{ gethtime(post.timestamp) }}</span>
-                <PostMenu v-on:emit-event="handleEmitEvent" />
+                <template v-if="post.user.id == currentUserId">
+                    <PostMenu v-on:emit-event="handleEmitEvent" />
+                </template>
             </Column>
         </Row>
         <Row>
@@ -23,16 +25,20 @@
         </Row>
         <template v-if="loggedIn">
             <Row>
-                <Column class="column__ct_12">
+                <Column class="column__ct_12 commentbox__container">
                     <CommentBox :postId="post.id" />
+                </Column>
+            </Row>            
+        </template>
+        
+        <template v-if="post.comments.length > 0">
+            <hr class="separator" />            
+            <Row>
+                <Column class="column__ct_12 comment__container">
+                    <Comment v-for="comment in post.comments" :key="comment.id" :comment="comment" :post="post"></Comment>
                 </Column>
             </Row>
         </template>
-        <Row>
-            <Column class="column__ct_12">
-                <Comment v-for="comment in post.comments" :key="comment.id" :comment="comment" :post="post"></Comment>
-            </Column>
-        </Row>
         
     </div>
 </template>
@@ -105,6 +111,9 @@ export default {
     computed: {
       loggedIn() {
         return store.state.loggedIn;
+      },
+      currentUserId() {
+        return mutations.getCurrentUser().id
       }
     },    
     mounted(){      
@@ -158,7 +167,7 @@ export default {
     }
 
     .nf-item .avatar {
-        max-width: 80px;
+        max-width: 60px;
         padding-right: 0;
     }
 
@@ -197,4 +206,11 @@ export default {
         padding: 0.5em;
         white-space: pre-wrap;
     }
+
+    .commentbox__container,
+    .comment__container {
+        padding: 0;
+    }
+
+    
 </style>

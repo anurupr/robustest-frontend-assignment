@@ -8,7 +8,7 @@
       </Row>
       <Row>
           <!-- Profile -->
-          <Column class="column__ct_3">
+          <Column class="column__ct_3 column__xs__ct_12 column__sm__ct_12 column__md__ct_12">
             <template v-if="loggedIn">
               <Profile />
             </template>
@@ -17,7 +17,7 @@
             </template>
           </Column>
           <!-- Post Box + News Feed -->
-          <Column class="column__ct_6">
+          <Column class="column__ct_6 column__xs__ct_12 column__sm__ct_12 column__md__ct_12">
             <template v-if="loggedIn">
               <PostBox />
             </template>

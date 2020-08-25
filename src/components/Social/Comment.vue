@@ -1,15 +1,17 @@
 <template>
     <div class="box nf-item comment">
         <Row>
-            <Column class="column__ct_1 avatar">
+            <Column class="column__ct_1 column__xs__ct_2 avatar">
                 <img :src="comment.user.gravatar">
             </Column>
             <Column class="column__ct_10">
                 <Column class="column__ct_12 content">
                     <Column class="column__ct_12 ">
-                        <span class="field username">{{ comment.user.username }}</span>
+                        <span class="field username">{{ comment.user.name }}</span>
                         <span class="field time">{{ comment.timestamp }}</span>
-                        <CommentMenu v-on:emit-event="handleEmitEvent" />
+                        <template v-if="loggedIn && comment.user.id == currentUserId">
+                            <CommentMenu v-on:emit-event="handleEmitEvent" />
+                        </template>
                     </Column>                
                     <Column class="column__ct_12 ">
                         <template v-if="editable">
@@ -80,6 +82,14 @@ export default {
         }
         
     },
+    computed: {
+      loggedIn() {
+        return store.state.loggedIn;
+      },
+      currentUserId() {
+        return mutations.getCurrentUser().id
+      }
+    },
     data() {
         return {
             content: null,
@@ -99,8 +109,7 @@ export default {
         box-shadow: none;
         float: left;
         width: 100%;
-        padding-top: 0;
-        padding-bottom: 0;
+        padding: 0;
     } 
 
     .nf-item.comment .content {

@@ -1,6 +1,6 @@
 <!-- Layout Menu -->
 <template>    
-    <ul class="menu" :class="menuLayout">        
+    <ul class="menu" :class="[menuLayout, cl]">        
         <MenuItem v-for="item in urls" :key="item.name" :item="item" v-on:emit-event="handleEmitEvent" />
     </ul>    
 </template>
@@ -9,7 +9,7 @@ import MenuItem from '@/components/Common/MenuItem.vue'
 
 export default {
     name: 'Menu',
-    props: ['urls', 'layout'],
+    props: ['urls', 'layout', 'cl'],
     components: {
         MenuItem
     },
@@ -84,5 +84,26 @@ export default {
 
     ul.menu li ul li a {
         background-color: transparent;
+    }
+
+    ul.menu.responsive {
+        display: none;
+    }
+
+    ul.menu.floating {
+        position: absolute;
+        top: 0;
+        right: 0;
+        margin: 0;
+    }
+
+
+    @media screen and (max-width: 576px) {
+        ul.menu.regular {
+            display: none;
+        }
+        ul.menu.responsive {
+            display: block;
+        }
     }
 </style>
