@@ -21,7 +21,7 @@ export default {
                     id: mutations.getLatestCommentIdForPost(this.postId),
                     content: this.content,
                     user : mutations.getCurrentUser(),
-                    timestamp: moment().fromNow()            
+                    timestamp: moment().unix()            
                 }
                 mutations.addComment(this.postId, comment);
             } else {
