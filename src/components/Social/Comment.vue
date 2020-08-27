@@ -32,7 +32,7 @@
 import Column from '@/components/Common/Column'
 import Row from '@/components/Common/Row'
 import CommentMenu from '@/components/Social/CommentMenu'
-import { mutations } from '@/store';
+import { store, mutations } from '@/store';
 
 export default {
     name: 'Comment',

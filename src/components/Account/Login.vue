@@ -18,7 +18,7 @@
 import Modal from '@/components/Common/Modal'
 import Column from '@/components/Common/Column'
 import { store } from '@/store'
-import { bus } from '../../main'
+import { bus } from '../../bus'
 export default {
     name: 'Login',
     components: {

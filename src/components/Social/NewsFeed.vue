@@ -6,7 +6,7 @@
 <script>
 import Post from '@/components/Social/Post'
 import { store, mutations } from '@/store';
-import { bus } from '../../main'
+import { bus } from '../../bus'
 export default {
     name: 'NewsFeed',
     components: {

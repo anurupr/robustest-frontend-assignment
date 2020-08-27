@@ -38,7 +38,7 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { faEdit, faTrash, faSignInAlt, faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { store } from '@/store'
-import { bus } from '../../main'
+import { bus } from '../../bus'
 library.add(faEdit, faTrash, faSignInAlt, faSignOutAlt)
 export default {
     name: 'MenuItem',

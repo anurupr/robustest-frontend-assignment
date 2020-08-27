@@ -10,7 +10,7 @@
 
 <script>
 import Home from '@/views/Home.vue'
-import { bus } from './main'
+import { bus } from './bus'
 import ActivityIndicator from '@/components/Common/ActivityIndicator'
 import Login from '@/components/Account/Login'
 import { mutations } from '@/store'

@@ -1,5 +1,5 @@
 <template>
-    <div class="box nf-item">
+    <div class="box nf-item post">
         <Row>
             <Column class="column__ct_1  column__xs__ct_2 avatar">
                 <img :src="post.user.gravatar">
