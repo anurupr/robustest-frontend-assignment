@@ -4,9 +4,9 @@
     </TextBox>
 </template>
 <script>
-import TextBox from '@/components/Common/TextBox'
+const TextBox = () => import('@/components/Common/TextBox')
 import { mutations } from '@/store';
-var moment = require('moment');
+import { getutime } from '@/utils';
 export default {
     name: 'PostBox',
     components: {
@@ -19,7 +19,7 @@ export default {
                     id: mutations.getLatestPostId(),
                     content: this.content,
                     user : mutations.getCurrentUser(),
-                    timestamp: moment().unix(),
+                    timestamp: getutime(),
                     comments: []      
                 }
                 mutations.addPost(post);

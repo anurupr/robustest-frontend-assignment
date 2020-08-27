@@ -1,0 +1,30 @@
+{
+  "errors": [
+    "Entry module not found: Error: Can't resolve './src' in '/home/dev/code/social'\nresolve './src' in '/home/dev/code/social'\n  using description file: /home/dev/code/social/package.json (relative path: .)\n    Field 'browser' doesn't contain a valid alias configuration\n    using description file: /home/dev/code/social/package.json (relative path: ./src)\n      no extension\n        Field 'browser' doesn't contain a valid alias configuration\n        /home/dev/code/social/src is not a file\n      .wasm\n        Field 'browser' doesn't contain a valid alias configuration\n        /home/dev/code/social/src.wasm doesn't exist\n      .mjs\n        Field 'browser' doesn't contain a valid alias configuration\n        /home/dev/code/social/src.mjs doesn't exist\n      .js\n        Field 'browser' doesn't contain a valid alias configuration\n        /home/dev/code/social/src.js doesn't exist\n      .json\n        Field 'browser' doesn't contain a valid alias configuration\n        /home/dev/code/social/src.json doesn't exist\n      as directory\n        existing directory\n          using path: /home/dev/code/social/src/index\n            using description file: /home/dev/code/social/package.json (relative path: ./src/index)\n              no extension\n                Field 'browser' doesn't contain a valid alias configuration\n                /home/dev/code/social/src/index doesn't exist\n              .wasm\n                Field 'browser' doesn't contain a valid alias configuration\n                /home/dev/code/social/src/index.wasm doesn't exist\n              .mjs\n                Field 'browser' doesn't contain a valid alias configuration\n                /home/dev/code/social/src/index.mjs doesn't exist\n              .js\n                Field 'browser' doesn't contain a valid alias configuration\n                /home/dev/code/social/src/index.js doesn't exist\n              .json\n                Field 'browser' doesn't contain a valid alias configuration\n                /home/dev/code/social/src/index.json doesn't exist"
+  ],
+  "warnings": [
+    "configuration\nThe 'mode' option has not been set, webpack will fallback to 'production' for this value. Set 'mode' option to 'development' or 'production' to enable defaults for each environment.\nYou can also set it to 'none' to disable any default behavior. Learn more: https://webpack.js.org/configuration/mode/"
+  ],
+  "version": "4.44.1",
+  "hash": "35eac33c8b8829271e92",
+  "time": 44,
+  "builtAt": 1598537314376,
+  "publicPath": "",
+  "outputPath": "/home/dev/code/social/dist",
+  "assetsByChunkName": {},
+  "assets": [],
+  "filteredAssets": 0,
+  "entrypoints": {},
+  "namedChunkGroups": {},
+  "chunks": [],
+  "modules": [],
+  "filteredModules": 0,
+  "logging": {
+    "webpack.buildChunkGraph.visitModules": {
+      "entries": [],
+      "filteredEntries": 1,
+      "debug": false
+    }
+  },
+  "children": []
+}

@@ -15,8 +15,8 @@
     </Modal>
 </template>
 <script>
-import Modal from '@/components/Common/Modal'
-import Column from '@/components/Common/Column'
+const Modal = () => import('@/components/Common/Modal')
+const Column = () => import('@/components/Common/Column')
 import { store } from '@/store'
 import { bus } from '../../bus'
 export default {

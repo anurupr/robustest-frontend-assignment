@@ -2,7 +2,7 @@
     <Menu :urls="urls" :cl="cl" v-on:emit-event="handleEmitEvent" />
 </template>
 <script>
-import Menu from '@/components/Common/Menu'
+const Menu = () => import('@/components/Common/Menu')
 export default {
     name: 'CommentMenu',
     components: {
