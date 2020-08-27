@@ -33,6 +33,7 @@ import Column from '@/components/Common/Column'
 import Row from '@/components/Common/Row'
 import CommentMenu from '@/components/Social/CommentMenu'
 import { store, mutations } from '@/store';
+import { gethtime } from '@/utils';
 
 export default {
     name: 'Comment',
