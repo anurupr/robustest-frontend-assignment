@@ -43,11 +43,11 @@
     </div>
 </template>
 <script>
-import Column from '@/components/Common/Column'
-import Row from '@/components/Common/Row'
-import Comment from '@/components/Social/Comment'
-import CommentBox from '@/components/Social/CommentBox'
-import PostMenu from '@/components/Social/PostMenu'
+const Column = () => import('@/components/Common/Column')
+const Row = () => import('@/components/Common/Row')
+const Comment = () => import('@/components/Social/Comment')
+const CommentBox = () => import('@/components/Social/CommentBox')
+const PostMenu = () => import('@/components/Social/PostMenu')
 import { store, mutations } from '@/store';
 import { gethtime } from '@/utils';
 export default {

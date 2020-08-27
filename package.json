@@ -13,19 +13,17 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.30",
     "@fortawesome/free-solid-svg-icons": "^5.14.0",
     "@fortawesome/vue-fontawesome": "^0.1.10",
-    "core-js": "^3.6.5",
-    "moment": "^2.27.0",
+    "date-fns": "^2.15.0",
     "vue": "^2.6.11"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "~4.4.0",
-    "@vue/cli-plugin-eslint": "~4.4.0",
+    "@babel/plugin-syntax-dynamic-import": "^7.8.3",
     "@vue/cli-service": "~4.4.0",
     "@vue/test-utils": "^1.0.4",
-    "babel-eslint": "^10.1.0",
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^6.2.2",
-    "vue-template-compiler": "^2.6.11"
+    "vue-template-compiler": "^2.6.11",
+    "webpack-visualizer-plugin": "^0.1.11"
   },
   "eslintConfig": {
     "root": true,
@@ -46,5 +44,4 @@
     "last 2 versions",
     "not dead"
   ]
-  
 }

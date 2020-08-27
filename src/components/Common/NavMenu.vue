@@ -6,7 +6,7 @@
     </nav>
 </template>
 <script>
-import Menu from '@/components/Common/Menu.vue'
+const Menu = () => import('@/components/Common/Menu')
 import { bus } from '../../bus'
 export default {
     name: 'NavMenu',

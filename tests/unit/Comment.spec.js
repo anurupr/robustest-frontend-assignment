@@ -1,6 +1,6 @@
 import { mount } from '@vue/test-utils'
 import { mutations } from '@/store'
-import moment from 'moment'
+import { getutime } from '@/utils'
 import Comment from '@/components/Social/Comment'
 
 
@@ -17,7 +17,7 @@ describe('Comment', () => {
             id: parseInt(Math.random(1, 10)),
             content: "Lorem ipsum",
             user : mutations.getCurrentUser(),
-            timestamp: moment().fromNow()            
+            timestamp: getutime()            
         };      
         const wrapper = factory({ comment })
         expect(wrapper.find('.comment').exists()).toBe(true)

@@ -4,7 +4,7 @@
     </div>
 </template>
 <script>
-import Post from '@/components/Social/Post'
+const Post = () => import('@/components/Social/Post')
 import { store, mutations } from '@/store';
 import { bus } from '../../bus'
 export default {

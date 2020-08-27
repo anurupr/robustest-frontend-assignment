@@ -16,8 +16,8 @@
     </div>
 </template>
 <script>
-import Column from '@/components/Common/Column'
-import Row from '@/components/Common/Row'
+const Column = () => import('@/components/Common/Column')
+const Row = () => import('@/components/Common/Row')
 import { mutations } from '@/store'
 
 export default {

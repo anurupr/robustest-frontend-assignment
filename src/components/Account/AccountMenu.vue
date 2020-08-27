@@ -3,7 +3,7 @@
     <Menu />    
 </template>
 <script>
-import Menu from '@/components/Common/Menu.vue'
+const Menu = () => import('@/components/Common/Menu')
 
 export default {
     name: 'AccountMenu',
