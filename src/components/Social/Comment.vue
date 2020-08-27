@@ -8,7 +8,7 @@
                 <Column class="column__ct_12 content">
                     <Column class="column__ct_12 ">
                         <span class="field username">{{ comment.user.name }}</span>
-                        <span class="field time">{{ gethtime(post.timestamp) }}</span>
+                        <span class="field time">{{ gethtime(comment.timestamp) }}</span>
                         <template v-if="loggedIn && comment.user.id == currentUserId">
                             <CommentMenu v-on:emit-event="handleEmitEvent" />
                         </template>
