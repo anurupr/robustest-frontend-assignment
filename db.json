@@ -11,7 +11,18 @@
             "gravatar": "https://www.gravatar.com/avatar/3f3fd2973e4d5ef103ce6d8d17bfa1b2/?d=robohash&r=PG"
         },
         "timestamp": 1596993895,
-        "comments": []
+        "comments": [{
+             "id": 1,
+             "user": {
+               id: 234,
+               "username": "Bret",
+               "name": "Leanne Graham",
+               "email": "Sincere@april.biz"
+             },
+             "content": "this is a comment",
+             "timestamp": 1596999999,
+            
+        }]
     
     },
     {   
@@ -25,7 +36,18 @@
             "gravatar" : "https://www.gravatar.com/avatar/df7b811abae80971a5a790395764f6d0/?d=robohash&r=PG"
         },
         "timestamp": 1596993895,
-        "comments": []
+        "comments": [{
+             "id": 1,
+             "user": {
+               id: 3453,
+               "username": "Antonette",
+               "name": "Ervin Howell",
+               "email": "Shanna@melissa.tv"
+             },
+             "content": "this is a comment",
+             "timestamp": 1596999999,
+            
+        }]
     }
   ],
   "comments": [   
