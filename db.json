@@ -14,10 +14,12 @@
         "comments": [{
              "id": 1,
              "user": {
-               id: 234,
+               "id": 234,
                "username": "Bret",
                "name": "Leanne Graham",
-               "email": "Sincere@april.biz"
+               "email": "Sincere@april.biz",               
+               "gravatar": "https://www.gravatar.com/avatar/BB1E4BD8ED6346E89FA9FCCD86B6D2B7/?d=robohash&r=PG"
+               
              },
              "content": "this is a comment",
              "timestamp": 1596999999,
@@ -42,7 +44,8 @@
                id: 3453,
                "username": "Antonette",
                "name": "Ervin Howell",
-               "email": "Shanna@melissa.tv"
+               "email": "Shanna@melissa.tv",
+               "gravatar": "https://www.gravatar.com/avatar/12ABBEE33D3429F1DE0DDAC918A12D0E/?d=robohash&r=PG"
              },
              "content": "this is a comment",
              "timestamp": 1596999999,
