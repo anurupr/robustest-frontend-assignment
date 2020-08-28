@@ -47,8 +47,6 @@ export default {
         FontAwesomeIcon
     },
     data() {
-        console.log('store.state', store.state);
-        console.log('store.state[this.item.cond] == this.item.condValue', this.item.cond, store.state[this.item.cond], this.item.condValue, store.state[this.item.cond] == this.item.condValue);
         return {            
             isOpen: false,
             active: false,            
@@ -67,7 +65,6 @@ export default {
             e.preventDefault();
         },
         onClick: function(event, e)  {
-            console.log('onClick', event);
             this.$emit("emit-event", event);
             this.isOpen = false;
             e.preventDefault()
@@ -81,11 +78,7 @@ export default {
     },
     // not essential, but can be used for debugging
     created() {    
-        bus.$on('login-change', function(d) {
-            console.log('login-change d', d);            
-            console.log('login-change isVisible', this.name, this.isVisible);
-            console.log('login-change store.state.loggedIn', store.state.loggedIn);
-        })
+        bus.$on('login-change', function(d) {})
     }
 }
 </script>

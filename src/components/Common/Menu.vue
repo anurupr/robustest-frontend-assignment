@@ -27,7 +27,6 @@ export default {
     },
     methods: {
         handleEmitEvent(ev) {
-            console.log('handleEmitEvent', ev);
             this.$emit('emit-event', ev);
         }
     }
