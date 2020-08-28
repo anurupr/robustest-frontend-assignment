@@ -130,4 +130,11 @@ export default {
         top: 0;
         right: 0;
     }
+
+    p[contenteditable="true"] {
+        border: 1px solid #aaa;
+        padding: 0.5em;
+        white-space: pre-wrap;
+        background: #fff;
+    }
 </style>
