@@ -1,11 +1,10 @@
-// () => import doesn't work with crypto
-const crypto = import('crypto');
+import crypto from 'crypto'
 
 // const moment = () => import('moment');
 import { formatDistance, fromUnixTime, getUnixTime } from 'date-fns' 
 
-export const md5 = str => {
-    return crypto.then((m) => m.createHash('md5').update(str).digest("hex"));
+export const md5 = (str) => {
+    return crypto.createHash('md5').update(str).digest("hex")
 }
 
 export const  cgravatar = (email) => {
