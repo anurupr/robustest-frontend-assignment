@@ -62,7 +62,6 @@ export const mutations = {
             return post.comments.find(c => c.id == commentId);
     },  
     addPost(post) {
-        console.log('post', post);
         store.state.posts.unshift(post);
         return Posts.createPost(post);
     },
@@ -80,7 +79,6 @@ export const mutations = {
         }
     },
     deletePost(postId) {
-        console.log('postId delete', postId);
         const postIndex = this.getPostIndex(postId);
         if (postIndex != -1) {
             store.state.posts.splice(postIndex, 1); 
@@ -111,8 +109,7 @@ export const mutations = {
             return null;
         }
     },
-    deleteComment(postId, commentId) {
-        console.log('store', 'deleting comment id', commentId, ' of post id', postId);        
+    deleteComment(postId, commentId) {        
         const postIndex = this.getPostIndex(postId);
         const commentIndex =  this.getCommentIndex(postId, commentId);
         if (postIndex != -1 && commentIndex != -1) {            
@@ -125,7 +122,6 @@ export const mutations = {
     getAllPosts() {
         return Posts.getPosts()
         .then((json) => {
-            console.log('json', json);
             store.state.posts = json;
             store.state.posts.sort((a, b) => b.timestamp - a.timestamp);            
         })
@@ -135,7 +131,6 @@ export const mutations = {
         .then(response => response.json())
         .then(json => {
             store.state.users = json;
-            // console.log(store.state.users);
         })
     }
 };

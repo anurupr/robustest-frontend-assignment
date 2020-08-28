@@ -38,7 +38,6 @@ export default {
       }
     })
     bus.$on('start-logout', () => {
-      console.log('starting logout process');
       mutations.logout();
     })
   }

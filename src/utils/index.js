@@ -11,10 +11,6 @@ export const  cgravatar = (email) => {
     return 'https://www.gravatar.com/avatar/' + md5(email)+ '?d=robohash&r=PG'
 }
 
-// DEPRECATED
-// export const gethtime = (timestamp) => {
-//    return moment.unix(timestamp).fromNow();
-// }
 
 export const gethtime = (timestamp) => {
    return formatDistance(fromUnixTime(timestamp), new Date(), { addSuffix: true });
@@ -27,14 +23,6 @@ export const getutime = (t) => {
 
     return getUnixTime(t)
 }
-
-// DEPRECATED
-// export const getrandomtime = () => {
-//     var d =  randomDate(new Date(2012, 0, 1), new Date());
-//     console.log('d', d)
-//     return moment(d).unix();
-// }
-
 
 export const getrandomtime = () => {
     var d =  randomDate(new Date(2012, 0, 1), new Date());    

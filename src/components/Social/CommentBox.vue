@@ -15,7 +15,6 @@ export default {
     },
     methods: {
         addComment: function() {
-            console.log('content', this.content);
             if (this.content != "") {
                 var comment = {
                     id: mutations.getLatestCommentIdForPost(this.postId),

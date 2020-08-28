@@ -16,24 +16,10 @@ module.exports = {
       config.plugin('visualizer')
       .use(Visualizer, [{ filename: 'stats.html'}])
 
-      config.plugin('copy').tap(([options]) => {
-        console.log('options', options);
-        options[0].ignore.push('tests/**/*')
-        console.log('options', options);
+      config.plugin('copy').tap(([options]) => {        
+        options[0].ignore.push('tests/**/*')        
         return [options]
-      })
-      // .tap(args => {
-      //   console.log('args', args)
-      //   args[0].template = '/Users/username/proj/app/templates/index.html'
-      //   return args
-      // })
-    },
-    //  plugins: [
-    //   /* config.plugin('context-replacement') */
-    //   new ContextReplacementPlugin(
-    //     /date\-fns[\/\\]/,
-    //     new RegExp(`[/\\\\\](${supportedLocales.join('|')})[/\\\\\]`)
-    //   )
-    //  ]
+      })      
+    }    
   }
   
